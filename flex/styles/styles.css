@@ -1,0 +1,201 @@
+/* RESET */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* BASE */
+
+body {
+  background-color: #ffa78f;
+  width: 100vw;
+  height: 100vh;
+  padding: 1rem;
+}
+
+/* CHESSBOARD */
+
+.chessboard {
+  width: 80vh;
+  height: 80vh;
+  margin: auto;
+  box-shadow: 0px 2px 10px rgb(0 0 0 / 29%);
+}
+
+.container {
+  display: flex;
+  height: calc(100% / 8);
+}
+
+.tile {
+  width: calc(100% / 8);
+}
+
+.container:nth-child(odd) .tile:nth-child(odd),
+.container:nth-child(even) .tile:nth-child(even) {
+  background-color: #f0f0f0;
+}
+
+.container:nth-child(odd) .tile:nth-child(even),
+.container:nth-child(even) .tile:nth-child(odd) {
+  background-image: linear-gradient(120deg, #ffa78f, #f23e2c);
+}
+
+/* PIECES BASE*/
+.tile::before {
+  content: ' ';
+  display: block;
+  font-size: 6.875vh;
+  text-align: center;
+  position: relative;
+}
+
+/* PAWN PIECES - WHITE */
+.container:nth-child(2) .tile::before {
+  content: '♙';
+}
+
+/* PAWN PIECES - BLACK */
+.container:nth-child(7) .tile:before {
+  content: '♟';
+}
+
+/* ROOK PIECES - WHITE */
+.container:first-child .tile:first-child::before,
+.container:first-child .tile:last-child::before {
+  content: '♖';
+}
+
+/* ROOK PIECES - BLACK */
+.container:last-child .tile:first-child::before,
+.container:last-child .tile:last-child::before {
+  content: '♜';
+}
+
+/* KNIGHT PIECES - WHITE */
+.container:first-child .tile:nth-child(2)::before,
+.container:first-child .tile:nth-child(7)::before {
+  content: '♘';
+}
+
+/* KNIGHT PIECES - BLACK */
+.container:last-child .tile:nth-child(2)::before,
+.container:last-child .tile:nth-child(7)::before {
+  content: '♞';
+}
+
+/* BISHOP PIECES - WHITE */
+.container:first-child .tile:nth-child(3)::before,
+.container:first-child .tile:nth-child(6)::before {
+  content: '♗';
+}
+
+/* BISHOP PIECES - BLACK */
+.container:last-child .tile:nth-child(3)::before,
+.container:last-child .tile:nth-child(6)::before {
+  content: '♝';
+}
+/* QUEEN PIECE - WHITE */
+.container:first-child .tile:nth-child(4)::before {
+  content: '♕';
+}
+
+/* QUEEN PIECE - BLACK */
+.container:last-child .tile:nth-child(4)::before {
+  content: '♛';
+}
+
+/* KING PIECE - WHITE */
+.container:first-child .tile:nth-child(5)::before {
+  content: '♔';
+}
+
+/* KING PIECE - BLACK */
+.container:last-child .tile:nth-child(5)::before {
+  content: '♚';
+}
+
+/* ANIMATION */
+.container:nth-child(2) .tile:nth-child(5)::before {
+  animation: 3s whitePawnDown 3s both, 3s whiteEat 9s both;
+}
+
+.container:nth-child(7) .tile:nth-child(4)::before {
+  animation: 3s blackPawnUp 6s both, 1s blackEaten 10.5s both;
+}
+
+@keyframes whitePawnDown {
+  from {
+    top: 0;
+  }
+  to {
+    transform: translate(0, 20vh);
+  }
+}
+
+@keyframes blackPawnUp {
+  from {
+    top: 0;
+  }
+  to {
+    transform: translate(0, -20vh);
+  }
+}
+
+@keyframes whiteEat {
+  from {
+    top: 0;
+  }
+  to {
+    transform: translate(-10vh, 30vh);
+  }
+}
+
+@keyframes blackEaten {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+/* MEDIA QUERIES */
+@media (orientation: portrait) {
+  .chessboard {
+    width: 80vw;
+    height: 50vh;
+  }
+
+  .tile::before {
+    font-size: 6.25vh;
+  }
+
+  @keyframes whitePawnDown {
+    from {
+      top: 0;
+    }
+    to {
+      transform: translate(0, 12.5vh);
+    }
+  }
+
+  @keyframes blackPawnUp {
+    from {
+      top: 0;
+    }
+    to {
+      transform: translate(0, -12.5vh);
+    }
+  }
+
+  @keyframes whiteEat {
+    from {
+      top: 0;
+    }
+    to {
+      transform: translate(-6.25vh, 18.75vh);
+    }
+  }
+}
